@@ -5,8 +5,9 @@ const socket = io('https://twine-rt.com', {
   transports: ['websocket', 'polling'],
 });
 
-socket.on('connect', () => {
-  console.log('Connected to the Twine server');
+socket.on('connect', async () => {
+  console.log('Connected to twine server');
+  await socket.emit('stateRecovery');
 });
 
 socket.on("message", (data) => {
