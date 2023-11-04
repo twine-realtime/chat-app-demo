@@ -1,4 +1,4 @@
-fetch('https://twine-rt.com/set-cookie', { credentials: 'include' })
+await fetch('https://twine-rt.com/set-cookie', { credentials: 'include' })
 
 const socket = io('https://twine-rt.com', { 
   withCredentials: true,
@@ -70,17 +70,16 @@ disconnectBtn.addEventListener('click', (e) => {
   socket.disconnect();
   setTimeout(() => {
     socket.connect();
-  }, 10000)
+  }, 3000)
 });
 
 // fires event when a room is selected from the dropdown
-document.addEventListener('DOMContentLoaded', () => {
-  const options = document.getElementById('options');
+const options = document.getElementById('options');
 
-  options.addEventListener('change', () => {
-    const selectedOption = options.value;
-    // join room <button value> on change event
-    // server then emits back to roomJoined (below)
-    socket.emit('join', `${selectedOption}`);
-  });
+options.addEventListener('change', () => {
+  const selectedOption = options.value;
+  // join room <button value> on change event
+  // server then emits back to roomJoined (below)
+  socket.emit('join', `${selectedOption}`);
+  console.log('JOINED ROOM');
 });
