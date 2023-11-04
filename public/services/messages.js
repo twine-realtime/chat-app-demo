@@ -64,11 +64,6 @@ socket.on('roomJoined', (msg) => {
   console.log(msg);
 });
 
-if (document.readyState === 'complete') {
-  // The document is still loading, we can add the event listener normally.
-  console.log('COMPLETE');
-} 
-
 const disconnectBtn = document.getElementById('disconnect');
 disconnectBtn.addEventListener('click', (e) => {
   e.preventDefault();
