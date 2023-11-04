@@ -1,4 +1,4 @@
-import { Twine } from './library/dist/client.js'
+import { Twine } from '../../src/library/dist/client.js'
 
 console.log(Twine)
 
@@ -43,7 +43,9 @@ disconnectBtn.addEventListener('click', (e) => {
   e.preventDefault();
   twine.disconnect();
   setTimeout(() => {
+		// fetch(`${host}/set-cookie`, { credentials: 'include' }) // rc cookie pops up
     twine.connect();
+    // stateRecovery (?)
   }, 10000)
 });
 

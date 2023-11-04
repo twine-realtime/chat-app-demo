@@ -1,4 +1,6 @@
 import { io, Socket } from 'socket.io-client';
+// const { io, Socket } = socket.io-client;
+// import('socket.io-client');
 
 // const DEPLOYED_HOST = '44.212.23.240:3001';
 // const LOCALHOST = 'http://localhost:3001';
