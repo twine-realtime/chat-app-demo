@@ -76,9 +76,10 @@ select {
 	border: none; 
 	padding: 0 1rem; 
 	margin: 0.25rem; 
-	border-radius: 3px; 
+	border-radius: 3px;
+	padding-right: 30px;
 	outline: none; 
-	color: #fff; 
+	color: #fff;
 }
 
 select:hover {
