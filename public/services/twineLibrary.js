@@ -40,8 +40,6 @@ export class Twine {
 		// this.socket.emit('subscribe', roomsToJoin);
     // server then emits back to roomJoined (below)
     this.socket.on("roomJoined", (msg) => console.log(msg))
-		// should change the listener on the server to `subscribe`
-		// should accept an array of strings instead of a single string
 	}
 
 	unsubscribe(roomsToLeave) {

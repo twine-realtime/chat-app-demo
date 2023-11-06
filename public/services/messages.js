@@ -1,6 +1,5 @@
 import { Twine } from './twineLibrary.js'
 
-console.log(Twine)
 
 const host = 'https://twine-rt.com'
 const twine = new Twine(host)
@@ -8,10 +7,10 @@ const twine = new Twine(host)
 const logMessageInfo = (data) => {
   console.log('data from client: ', data);
   console.log('room id from client: ', data.room);
-  twine.socket.emit("updateSessionTS", (data.timestamp));
 }
 
 const addMessageToDOM = (data) => {
+  const messages = document.getElementById('messages');
   const item = document.createElement('li');
   item.textContent = data.message;
   messages.appendChild(item);
@@ -72,12 +71,3 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
-
-// ---- Update Chris
-// added type=module to socket cdn script in 'html' file
-// moved 'roomJoined' event to twineLibrary
-// cleaned up listeners
-// unsubscribe functionality
-// - add another dropdown list 'Deselect a Room'
-// - update event listeners to reflect 'subOptions' & 'unsubOptions'
-// - update Twine.unsubscribe to reflect an 'unsubscribe' & 'roomLeft' event - functionality needs to be added
