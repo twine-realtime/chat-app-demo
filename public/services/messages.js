@@ -70,7 +70,7 @@ disconnectBtn.addEventListener('click', (e) => {
   socket.disconnect();
   setTimeout(async () => {
     socket.connect();
-  }, 10000)
+  }, 3000)
 });
 
 
