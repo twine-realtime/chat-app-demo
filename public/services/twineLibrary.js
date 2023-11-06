@@ -36,18 +36,21 @@ export class Twine {
 	}
 
 	subscribe(roomsToJoin) {
-		this.socket.emit('join', roomsToJoin);
-		// should change the listener on the server to `subscribe`
-		// should accept an array of strings instead of a single string
+		this.socket.emit('subscribe', roomsToJoin);
+		// this.socket.emit('subscribe', roomsToJoin);
+    // server then emits back to roomJoined (below)
+    this.socket.on("roomJoined", (msg) => console.log(msg))
 	}
 
 	unsubscribe(roomsToLeave) {
-		this.socket.emit('leave', roomsToLeave);
-		// need to create a listener on the server to ctach this event and unsubscribe
+		// need to create a listener on the server to catch this event and unsubscribe
+		this.socket.emit('unsubscribe', roomsToLeave);
+    // server then emits back to roomLeft (below) (?) - functionality needs to be added
+    this.socket.on("roomLeft", (msg) => console.log(msg))
 		// param should be an array of strings
 	}
 
-	async listenOn(roomName, callback) {
+  async listenOn(roomName, callback) {
 		const id = setInterval(() => {
 			if (this.socket) {
 				this.socket.on("message", (payload) => {

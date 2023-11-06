@@ -1,8 +1,7 @@
-// const express = require('express');
 import express from 'express';
 const app = express();
 
-import cors from "cors";
+import cors from 'cors';
 app.use(cors());
 
 app.use(express.static('./public'));

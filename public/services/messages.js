@@ -1,148 +1,73 @@
-await fetch('https://twine-rt.com/set-cookie', { credentials: 'include' });
+import { Twine } from './twineLibrary.js'
 
-const socket = io('https://twine-rt.com', { 
-  withCredentials: true,
-  transports: ['websocket'],
-});
 
-const messages = document.getElementById('messages');
-
-socket.on('connect', async () => {
-  console.log('Connected to twine server');
-  await socket.emit('stateRecovery');
-});
+const host = 'https://twine-rt.com'
+const twine = new Twine(host)
 
 const logMessageInfo = (data) => {
   console.log('data from client: ', data);
   console.log('room id from client: ', data.room);
-  socket.emit("updateSessionTS", (data.timestamp));
 }
 
 const addMessageToDOM = (data) => {
+  const messages = document.getElementById('messages');
   const item = document.createElement('li');
   item.textContent = data.message;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 }
 
-const listenOn = (socket, roomName, callback) => {
-  // console.log("roomName:", roomName);
-  socket.on("message", (payload) => {
-    // console.log("payload:", payload);
-    if (payload.room === roomName) {
-      callback(payload);
-    }
-  });
-};
-
-// socket.on("message", (data) => {
-//   logMessageInfo(data);
-//   addMessageToDOM(data);
-// });
-
-listenOn(socket, "A", (payload) => {
-  logMessageInfo(payload);
-  addMessageToDOM(payload);
-})
-
-listenOn(socket, "B", (payload) => {
-  logMessageInfo(payload);
-  addMessageToDOM(payload);
-})
-
-listenOn(socket, "C", (payload) => {
-  logMessageInfo(payload);
-  addMessageToDOM(payload);
-})
-
-listenOn(socket, "D", (payload) => {
-  logMessageInfo(payload);
-  addMessageToDOM(payload);
-})
-
-socket.on('roomJoined', (msg) => {
-  console.log(msg);
+twine.listenOn("A", (data) => {
+  logMessageInfo(data);
+  addMessageToDOM(data);
 });
 
-const disconnectBtn = document.getElementById('disconnect');
-disconnectBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  socket.disconnect();
-  setTimeout(async () => {
-    socket.connect();
-  }, 3000)
+twine.listenOn("B", (data) => {
+  logMessageInfo(data);
+  addMessageToDOM(data);
 });
 
+twine.listenOn("C", (data) => {
+  logMessageInfo(data);
+  addMessageToDOM(data);
+});
 
-// document.addEventListener('DOMContentLoaded', () => {
-  const options = document.getElementById('options');
+twine.listenOn("D", (data) => {
+  logMessageInfo(data);
+  addMessageToDOM(data);
+});
 
-  options.addEventListener('change', () => {
-    const selectedOption = options.value;
-    socket.emit('join', `${selectedOption}`);
+// fires event when a room is selected from the dropdown
+document.addEventListener('DOMContentLoaded', () => {
+  // const options = document.getElementById('options');
+  const subOptions = document.getElementById('sub-options');
+  const unsubOptions = document.getElementById('unsub-options');
+  const disconnectBtn = document.getElementById('disconnect');
+
+  subOptions.addEventListener('change', () => {
+    const selectedOption = subOptions.value;
+    // join room <button value> on change event
+    twine.subscribe(selectedOption);
   });
-// });
 
-//////////// Twine Implementation (not working) ////////////
+  unsubOptions.addEventListener('change', () => {
+    const deSelectedOption = unsubOptions.value;
+    // join room <button value> on change event
+    twine.unsubscribe(deSelectedOption);
+  });
 
-// await fetch('https://twine-rt.com/set-cookie', { credentials: 'include' })
+  // options.addEventListener('change', () => {
+  //   const selectedOption = options.value;
+  //   // join room <button value> on change event
+  //   twine.subscribe(selectedOption);
+  // });
 
-// import { Twine } from "./twineLibrary.js";
-// const twine = new Twine('https://twine-rt.com');
+  disconnectBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    twine.disconnect();
+    setTimeout(() => {
+      twine.connect();
+    }, 10000)
+  });
 
-// console.log("line 6", twine);
-
-// const messages = document.getElementById('messages');
-
-// const logMessageInfo = (data) => {
-//   console.log('data from client: ', data);
-//   console.log('room id from client: ', data.room);
-// }
-
-// const addMessageToDOM = (data) => {
-//   const item = document.createElement('li');
-//   item.textContent = data.message;
-//   messages.appendChild(item);
-//   window.scrollTo(0, document.body.scrollHeight);
-// }
-
-// twine.listenOn("A", (payload) => {
-//   console.log("line 23", twine);
-//   // logMessageInfo(payload);
-//   addMessageToDOM(payload);
-// })
-
-// twine.listenOn("B", (payload) => {
-//   // logMessageInfo(payload);
-//   addMessageToDOM(payload);
-// })
-
-// twine.listenOn("C", (payload) => {
-//   // logMessageInfo(payload);
-//   addMessageToDOM(payload);
-// })
-
-// twine.listenOn("D", (payload) => {
-//   // logMessageInfo(payload);
-//   addMessageToDOM(payload);
-// })
-
-// twine.listenOn('roomJoined', (msg) => {
-//   console.log(msg);
-// });
-
-// const disconnectBtn = document.getElementById('disconnect');
-// disconnectBtn.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   twine.disconnect();
-//   setTimeout(async () => {
-//     twine.connect();
-//   }, 10000)
-// });
-
-// const options = document.getElementById('options');
-
-// options.addEventListener('change', () => {
-//   const selectedOption = options.value;
-//   twine.subscribe(selectedOption);
-// });
+});
