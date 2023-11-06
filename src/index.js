@@ -1,7 +1,8 @@
-import { express } from 'express';
+import express from 'express';
 const app = express();
 
-const cors = require('cors');
+// const cors = require('cors'); // package.json has 'type': module so this won't work
+import cors from 'cors';
 app.use(cors());
 
 app.use(express.static('./public'));
