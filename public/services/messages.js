@@ -1,12 +1,5 @@
-import { TwineClientLibrary } from './twineClientLibrary.mjs'
-
-// this is the twine server library thats hard-coded in the twineServerLibrary.mjs file
-// this is working
-import { TwineServerLibrary } from './twineServerLibrary.mjs';
-
-// this is the twine server code installed as an npm package
-// this is raising an error/doesn't seem to import correctly
-// import { TwineServerLibrary } from "twine-server-library";
+import TwineClientLibrary from 'https://cdn.jsdelivr.net/npm/twine-client-library@1.0/+esm';
+import TwineServerLibrary from 'https://cdn.jsdelivr.net/npm/twine-server-library@1.0/+esm';
 
 const host = 'https://twine-rt.com';
 const twine = new TwineClientLibrary(host);
