@@ -2,7 +2,7 @@ export class TwineServerLibrary {
 	constructor(host) {
 		this.host = host + "/api/twine";
 	}
-	
+		
 	async publish(room, payload) {
 		try {
 			const body = {
