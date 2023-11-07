@@ -12,7 +12,20 @@ body {
 	z-index: -1;
 }
 
-#form { 
+#form-upper { 
+	background: rgba(0, 0, 0, 0.15); 
+	padding: 0.5rem; 
+	position: fixed; 
+	bottom: 4rem; 
+	left: 0; 
+	right: 0; 
+	display: flex; 
+	height: 4rem; 
+	box-sizing: border-box; 
+	backdrop-filter: blur(10px); 
+}
+
+#form-lower { 
 	background: rgba(0, 0, 0, 0.15); 
 	padding: 0.5rem; 
 	position: fixed; 
@@ -23,6 +36,14 @@ body {
 	height: 4rem; 
 	box-sizing: border-box; 
 	backdrop-filter: blur(10px); 
+  display: flex;
+  flex-grow: 1;
+}
+
+#disconnect,
+#sub-options,
+#unsub-options {
+  flex-grow: 1;
 }
 
 #input { 
@@ -37,7 +58,7 @@ body {
 	outline: none; 
 }
 
-#form > button { 
+#form-upper > button { 
 	background: #333; 
 	border: none; 
 	padding: 0 1rem; 
@@ -47,7 +68,22 @@ body {
 	color: #fff; 
 }
 
-#form > button:hover {
+#form-lower > button { 
+	background: #333; 
+	border: none; 
+	padding: 0 1rem; 
+	margin: 0.25rem; 
+	border-radius: 3px; 
+	outline: none; 
+	color: #fff; 
+}
+
+#form-upper > button:hover {
+	cursor: pointer;
+	background: #565656;
+}
+
+#form-lower > button:hover {
 	cursor: pointer;
 	background: #565656;
 }
@@ -67,21 +103,28 @@ body {
 	margin-bottom: 10px;
 }
 
-#messages > li:nth-child(odd) { 
-	/* background: #efefef;  */
-}
+/* #messages > li:nth-child(odd) { 
+	background: #efefef;
+} */
 
 select {
 	background: #333; 
 	border: none; 
 	padding: 0 1rem; 
 	margin: 0.25rem; 
-	border-radius: 3px; 
+	border-radius: 3px;
+	padding-right: 30px;
 	outline: none; 
-	color: #fff; 
+	color: #fff;
 }
 
 select:hover {
 	cursor: pointer;
 	background: #565656;
+}
+
+#line {
+	width: 0;
+	border: solid black 0.5px;
+	margin: 2px 8px;
 }

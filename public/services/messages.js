@@ -1,7 +1,16 @@
-import { Twine } from './twineLibrary.js'
+import { TwineClientLibrary } from './twineClientLibrary.mjs'
+
+// this is the twine server library thats hard-coded in the twineServerLibrary.mjs file
+// this is working
+import { TwineServerLibrary } from './twineServerLibrary.mjs';
+
+// this is the twine server code installed as an npm package
+// this is raising an error/doesn't seem to import correctly
+// import { TwineServerLibrary } from "twine-server-library";
 
 const host = 'https://twine-rt.com';
-const twine = new Twine(host);
+const twine = new TwineClientLibrary(host);
+const twineServer = new TwineServerLibrary(host);
 
 const logMessageInfo = (data) => {
   console.log('data from client: ', data);
@@ -17,29 +26,48 @@ const addMessageToDOM = (data) => {
 }
 
 twine.listenOn("A", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 twine.listenOn("B", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 twine.listenOn("C", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 twine.listenOn("D", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('input');
+  const sendBtn = document.getElementById('send');
+  const pubOptions = document.getElementById('pub-options');
   const subOptions = document.getElementById('sub-options');
   const unsubOptions = document.getElementById('unsub-options');
   const disconnectBtn = document.getElementById('disconnect');
+  let roomToPublishTo;
+
+  pubOptions.addEventListener('change', () => {
+    roomToPublishTo = pubOptions.value;
+  })
+
+  sendBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (roomToPublishTo) {
+      const message = input.value;
+      twineServer.publish(roomToPublishTo, { message }); 
+      roomToPublishTo = '';
+      input.value = '';
+      pubOptions.selectedIndex = 0;
+    }
+  })
 
   subOptions.addEventListener('change', () => {
     const selectedOption = subOptions.value;

@@ -2,29 +2,40 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Socket.IO chat</title>
+    <title>Chat App Demo</title>
 		<link rel="stylesheet" type="text/css" href="./css/main.css" />
   </head>
   <body>
 		<div id="background"></div>
 		<ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-      <button id="disconnect">Disconnect</button>
-      <select id="sub-options" name="options">
-          <option value="">Select a Room</option>
-          <option value="A">Room A</option>
-          <option value="B">Room B</option>
-          <option value="C">Room C</option>
-          <option value="D">Room D</option>
-      </select>
-      <select id="unsub-options" name="options">
-        <option value="">Deselect a Room</option>
+    <form id="form-upper" action="">
+      <input id="input" autocomplete="off" />
+      <select id="pub-options" name="options">
+        <option value="" selected disabled>Send Message To</option>
         <option value="A">Room A</option>
         <option value="B">Room B</option>
         <option value="C">Room C</option>
         <option value="D">Room D</option>
-    </select>
+      </select>
+      <button id="send">Send</button>
+    </form>
+    <form id="form-lower" action="">
+      <button id="disconnect">Disconnect</button>
+      <div id="line"></div>
+      <select id="sub-options" name="options">
+        <option value="" selected disabled>Subscribe to...</option>
+        <option value="A">Room A</option>
+        <option value="B">Room B</option>
+        <option value="C">Room C</option>
+        <option value="D">Room D</option>
+      </select>
+      <select id="unsub-options" name="options">
+        <option value="" selected disabled>Unsubscribe from...</option>
+        <option value="A">Room A</option>
+        <option value="B">Room B</option>
+        <option value="C">Room C</option>
+        <option value="D">Room D</option>
+      </select>
     </form>
     <script type="module" src="./services/messages.js"></script>
   </body>
