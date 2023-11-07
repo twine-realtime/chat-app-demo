@@ -1,5 +1,6 @@
 import { TwineClientLibrary } from './twineClientLibrary.mjs'
-import { TwineServerLibrary } from './twineServerLibrary.mjs';
+// import { TwineServerLibrary } from './twineServerLibrary.mjs';
+import { TwineServerLibrary } from "twine-server-library";
 
 const host = 'https://twine-rt.com';
 const twine = new TwineClientLibrary(host);
