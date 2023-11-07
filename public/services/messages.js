@@ -1,6 +1,12 @@
 import { TwineClientLibrary } from './twineClientLibrary.mjs'
-// import { TwineServerLibrary } from './twineServerLibrary.mjs';
-import { TwineServerLibrary } from "twine-server-library";
+
+// this is the twine server library thats hard-coded in the twineServerLibrary.mjs file
+// this is working
+import { TwineServerLibrary } from './twineServerLibrary.mjs';
+
+// this is the twine server code installed as an npm package
+// this is raising an error/doesn't seem to import correctly
+// import { TwineServerLibrary } from "twine-server-library";
 
 const host = 'https://twine-rt.com';
 const twine = new TwineClientLibrary(host);
@@ -20,22 +26,22 @@ const addMessageToDOM = (data) => {
 }
 
 twine.listenOn("A", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 twine.listenOn("B", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 twine.listenOn("C", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
 twine.listenOn("D", (data) => {
-  logMessageInfo(data);
+  // logMessageInfo(data);
   addMessageToDOM(data);
 });
 
